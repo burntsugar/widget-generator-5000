@@ -1,5 +1,7 @@
 # 🏷 WIDGET GENERATOR 5000 YO
 
+No but like seriously, maybe you want some data to tool around with?
+
 
 ## USE IT STRAIGHT-UP
 
