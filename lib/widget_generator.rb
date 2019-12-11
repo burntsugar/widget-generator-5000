@@ -2,7 +2,7 @@ module WidgetGenerator
 
     #
     # WidgetGenerator 5000
-    # rachael.colley@coderacademy.edu.au
+    # rach@rach
     #
 
     class Widget
@@ -15,6 +15,9 @@ module WidgetGenerator
         attr_accessor :heightcms
         attr_accessor :weightgms
         attr_accessor :valueaud
+
+        # Class variable
+        @@instance_count = 0
 
         def initialize(id,
             name,
@@ -33,6 +36,14 @@ module WidgetGenerator
             @heightcms = heightcms
             @weightgms = weightgms
             @valueaud = valueaud
+
+            # Increment the class variable each time an instance of  Widget is created...
+            @@instance_count += 1
+        end
+
+        # Class method - self keyword
+        def self.get_instance_count
+            @@instance_count
         end
 
         # Object string rep.
@@ -57,6 +68,28 @@ module WidgetGenerator
             str += "}"
         end
 
+        # Single object MongoDB representation.
+        def serialize_widget_for_mongodb
+            str = "{"
+            instance_variables.each { |var| 
+                str += var.to_s.delete("@")
+                    str += ':'
+                    case var
+                    when :@id, :@name, :@description
+                        str += enclose_in_quotes(instance_variable_get(var).to_s)
+                    when :@valueaud
+                        str += instance_variable_get(var).round(2).to_s
+                    else
+                        str += instance_variable_get(var).to_s
+                    end
+                str += ','
+            }
+            str.delete_suffix!(",")
+            str += "}"
+        end
+
+        
+
         # Object hash rep.
         def to_hash
             hash = {}
@@ -69,6 +102,8 @@ module WidgetGenerator
             }
             hash
         end
+
+    
 
         private 
 
@@ -86,6 +121,34 @@ module WidgetGenerator
             initialise_widgets
         end
 
+        ## 
+        # MongoDB representation...
+        # arg is optional.
+        #
+        def self.serialize_widgets_for_mongodb(widgets = nil)
+            if (!widgets)
+                widgets = generate_widgets
+            end
+            str = "(["
+            widgets.each do |widget|
+                str += widget.serialize_widget_for_mongodb + ",\n"
+            end
+            str.delete_suffix!(",\n")
+            str += "])"
+        end
+
+        def self.serialize_widgets_to_jzon(widgets = nil)
+            if (!widgets)
+                widgets = generate_widgets
+            end
+            str = "(["
+            widgets.each do |widget|
+                str += widget.to_jzon + ","
+            end
+            str.delete_suffix!(",")
+            str += "])"
+        end
+        
         private
         ##
         # Initialise 100 widgets to tool around with...
