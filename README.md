@@ -19,10 +19,16 @@ WidgetGenerator::WidgetManager.serialize_widgets_to_jzon # <= 100 widgets serial
 WidgetGenerator::WidgetManager.serialize_widgets_for_mongodb # <= 100 widgets serialized for MongoDB!
 ````
 
-## INSTALL IT
+## BUILD IT (I ALREADY DID)
 
 ````bash
-gem install widget_generator_gem.gemspec
+gem build widget_generator_gem.gemspec
+````
+
+## INSTALL IT (LIKE YOU MEAN IT)
+
+````bash
+gem install widget-generator-5000-2.gem
 ````
 
 ## 🤑 PROFIT
