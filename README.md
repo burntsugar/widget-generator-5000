@@ -41,5 +41,5 @@ Slides away under the bed.
 
 <br>
 
-[contributor code of conduct](CODE_OF_CONDUCT.md)
+[contributor code of conduct](docs/CODE_OF_CONDUCT.md)
 
