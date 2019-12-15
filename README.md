@@ -38,3 +38,7 @@ gem install widget-generator-5000-2.gem
 ## DON'T JUDGE ME
 
 Slides away under the bed.
+
+<br>
+
+[contributor code of conduct](CODE_OF_CONDUCT.md)
